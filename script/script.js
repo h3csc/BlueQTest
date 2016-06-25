@@ -73,8 +73,8 @@ function getValue(type,mainId,subId,format,dataSet,draw){
     if (draw){ //otherwise oo not write it on the UI
         if (format == "currency"){
             if (total > 10000){
-                $(mainId).html(Math.round(total/1000) + "k");
-                $(subId).html(Math.round(total/1000) + "k");
+                $(mainId).html("$"+Math.round(total/1000) + "k");
+                $(subId).html("$"+Math.round(total/1000) + "k");
             } else {
                 $(mainId).html(total);
                 $(subId).html(total);
