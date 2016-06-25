@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+    
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' source/source.json data: blob: filesystem:">-->
+    <title>BlueQ Test Site</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+    <script src="script/script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="CSS/style.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+      <div id="navbar">
+          <div id="nav-btn-container">
+                <a href=""><span class="nav-btn"><span class="img-container"><img src="icons/fitzroy.jpg" alt="fitzroy"></span>Fitzroy</span></a>
+                <a href=""><span class="nav-btn"><span class="img-container"><img src="icons/jane.jpg" alt="jane"></span>Jane</span></a>
+                <a href=""><span class="nav-btn"><span class="img-container"><img src="icons/signOut.jpg" alt="sign out"></span>Sign out</span></a>
+          </div>
+      </div>
+
+      <div class="container-fluid">
+          <div class="col-md-2" id="side-panel">
+              <a href=""><span class="panel-btn"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>  Home</span></a>
+              <a href=""><span class="panel-btn brand-col"><span><img src="icons/reporting.jpg" alt="reporting"></span>  Reporting</span></a>
+          </div>
+
+          <div class="col-md-10" id="dashboard">
+              <div class="col-md-12 dashboard-header-panel">
+                <div class="col-md-4 no-padding" role="group">
+                    <h1 class="dashboard-header">Retail Dashboard</h1>
+                </div>
+                <div class="col-md-8">
+                    <div class="align-right">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button id="sortDaily" class="btn btn-default btn-lg" aria-label="Left Align">Day</button>
+                            <button id="sortWeekly" class="btn btn-default btn-lg" aria-label="Left Align">Week</button>
+                            <button id="sortMonthly" class="btn btn-default btn-lg" aria-label="Left Align">Month</button>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                            <button class="btn btn-default btn-lg"><span id="dateRange">1st Dec 2014 - 31 Dec 2014</span></button>
+                            <button class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                        </div>
+                    </div>
+                </div>
+                      
+              </div>
+
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>REVENUE</h5>
+                            <h1 class="data-main">$<span id="mainRevenue"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comRevenue"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    $<span id="subRevenue"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="revenueChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>SALE COUNT</h5>
+                            <h1 class="data-main"><span id="mainSale"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comSale"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    <span id="subSale"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="saleChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>CUSTOMER COUNT</h5>
+                            <h1 class="data-main"><span id="mainCustomer"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comCustomer"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    <span id="subCustomer"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="customerChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>GROSS PROFIT</h5>
+                            <h1 class="data-main"><span id="mainGp"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comGp"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    <span id="subGp"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="gpChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>DISCOUNT</h5>
+                            <h1 class="data-main"><span id="mainDiscount"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comDiscount"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    <span id="subDiscount"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="discountChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>DISCOUNT %</h5>
+                            <h1 class="data-main"><span id="mainDiscountP"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comDiscountP"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    <span id="subDiscountP"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="discountPChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+
+              
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>BASKET VALUE</h5>
+                            <h1 class="data-main"><span id="mainBasketV"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comBasketV"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    <span id="subBasketV"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="basketVChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+
+              
+              <div class="col-md-3 col-sm-4 dashboard-panel-container">
+                  <div class="dashboard-panel">
+                      <div class="panel-upper">
+                            <h5>BASKET SIZE</h5>
+                            <h1 class="data-main"><span id="mainBasketS"></span></h1>
+                            <p class="data-comparison brand-col">
+                                <span id="comBasketS"></span>
+                            </p>
+                            <div>
+                                <div class="col-md-9 data-location">
+                                    Parkhurst
+                                </div>
+                                <div class="col-md-3 data-amount">
+                                    <span id="subBasketS"></span>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <canvas id="basketSChart" class="chart"></canvas>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!---------------------
+Just something that I put together quickly to generate a random (yet appear to be legit) data in JSON format to feed the UI.
+The generated file "source.json" is located in the source folder.
+Definitely not the best way to store data but just for the purpose of this demonstration
+--------------------->
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <div id="target">
+        </div>
+        <script>
+        var days = [31,31,30,31,30,31];
+        var months = ["jul","aug","sep","oct","nov","dec"]; 
+        var output = ""; 
+
+        var revenueMin = 100000/31;
+        var revenueMax = 300000/31;
+        var saleMin = 200/31;
+        var saleMax = 600/31;
+        var customerMin = 0;
+        var customerMax = 1;
+        var gpMin = 40000/31;
+        var gpMax = 145000/31;
+        var discountMin = 2000/31;
+        var discountMax = 62600/31;
+        var discountPMin = 0/31;
+        var discountPMax = 2.17/31;
+        var basketMin = 300/31;
+        var basketMax = 470/31;
+        var basketSMin = 2/31;
+        var basketSMax = 2.6/31;
+
+
+
+        for (var j=0;j<months.length;j++){
+            if (j==0){
+                output += '{"data":[';
+            }
+            for (var i=1;i<=days[j];i++){
+                output += generateLine(months[j],i);
+                output += ",";
+                if (j == months.length-1 && i == days[j]){
+                    output += generateLine(months[j],i);
+                    output += "]}";
+                }
+            }
+        }
+
+        function generateLine(month,day){
+            var revenue = countRange(revenueMin,revenueMax);
+            var sale = countRange(saleMin,saleMax);
+            var customer = countRange (customerMin,customerMax);
+            var gp = countRange(gpMin,gpMax);
+            var discount = countRange(discountMin,discountMax);
+            var discountP = countRange(discountPMin,discountPMax);
+            var basket = countRange(basketMin,basketMax);
+            var basketS = countRange(basketSMin,basketSMax);
+
+            return '{"month":"'+months[j]+'","day":"'+i+'","revenue":'+Math.round(revenue)+',"saleC":'+Math.round(sale)+',"customerC":'+Math.round(customer)+',"grossP":'+Math.round(gp)+',"discount":'+Math.round(discount)+',"discountP":'+discountP.toFixed(2)+',"basketV":'+Math.round(basket)+',"basketS":'+basketS.toFixed(2)+'}';
+        }
+
+        function countRange(min,max){
+            return Math.random()*(max-min)+min;
+        }
+
+        document.getElementById("target").innerHTML = output;
+        </script>
+    </body>
+</html>
